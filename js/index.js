@@ -5,7 +5,7 @@
         .factory('Questions', ['$http', function ($http) {
             return {
                 getAll: function () {
-                    return $http.get('./api/sql/queries.json');
+                    return $http.get('./api/test/test.json');
                 }
             };
         }])

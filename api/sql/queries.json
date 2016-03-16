@@ -3,7 +3,7 @@
     "title": "Studenti SSRIOnline - ordina matricola, voto",
     "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
     "description":"Elenca gli studenti SSRIOnline, che hanno fatto esami, in ordine ascendente di matricola e, per ognuno, indicando gli esami in ordine discendente di voto",
-    "solution":"SELECT S.* \nFROM Studenti S \nJOIN Esami E ON S.Matr = E.Matr \nWHERE S.CdL='SSRIOnline' ORDER BY S.Matr, E.Voto DESC"
+    "solution":"SELECT S.* \nFROM Studenti S \nJOIN Esami E \tON S.Matr = E.Matr \nWHERE S.CdL='SSRIOnline' ORDER BY S.Matr, E.Voto DESC"
   },
   {
     "title": "Numero studenti iscritti SSRIOnline",
