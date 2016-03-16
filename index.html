@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>RandomQ</title>
+
+  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="dist/css/main.css">
+
+</head>
+
+<body>
+
+  <header>
+    <h1> Random Q</h1>
+  </header>
+
+  <main ng-app="rndmq" ng-controller="MainCtrl as vm">
+
+    <div class="q">
+      <h3> {{vm.selectedQuestion.title}}</h3>
+      <blockquote>
+        <h5>
+        <i class="fa fa-table"></i>
+        {{vm.selectedQuestion.tables}}
+      </h5>
+
+        <p>{{vm.selectedQuestion.description}}</p>
+
+        <p>
+          <a href="#0" ng-click="vm.showSolution = !vm.showSolution;">
+            <span ng-show="!vm.showSolution">
+            <i class="fa fa-eye"></i> Show Solution?
+          </span>
+            <span ng-show="vm.showSolution">
+            <i class="fa fa-eye-slash"></i> Hide Solution
+          </span>
+          </a>
+        </p>
+
+        <p class="solution" ng-show="vm.showSolution">
+          {{vm.selectedQuestion.solution}}
+        </p>
+
+      </blockquote>
+
+    </div>
+
+    <div class="button">
+
+      <button ng-click="vm.getQ()"><i class="fa fa-random"></i> New Question</button>
+    </div>
+
+  </main>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-route/angular-route.min.js"></script>
+
+  <script src="dist/js/bundle.min.js"></script>
+
+
+
+
+</body>
+
+</html>

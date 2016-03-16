@@ -1,0 +1,160 @@
+[
+  {
+    "title": "Studenti SSRIOnline - ordina matricola, voto",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Elenca gli studenti SSRIOnline, che hanno fatto esami, in ordine ascendente di matricola e, per ognuno, indicando gli esami in ordine discendente di voto",
+    "solution":"SELECT S.* \nFROM Studenti S \nJOIN Esami E ON S.Matr = E.Matr \nWHERE S.CdL='SSRIOnline' ORDER BY S.Matr, E.Voto DESC"
+  },
+  {
+    "title": "Numero studenti iscritti SSRIOnline",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola il numero di studenti iscritti a SSRIOnline",
+    "solution":"SELECT count(*) \nFROM Studenti \nWHERE CdL = 'SSRIOnline';"
+  },
+  {
+    "title": "Numero studenti che hanno fatto almeno un esame",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola il numero di studenti che hanno fatto almeno un esame",
+    "solution":"SELECT count(distinct Matr) as NumStudenti \nFROM Esami \nGROUP BY Matr"
+  },
+  {
+    "title": "Voto più alto e più basso dell'esame di Basi Dati",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola il voto minimo e massimo per gli esami del corso Basi Dati (codice: 'BD')",
+    "solution":"SELECT max(Voto) as Alto, min(Voto) as Basso \nFROM Esami \nWHERE Cod-Corso='BD';"
+  },
+  {
+    "title": "Media voti matricola 123456",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola la media voti dello studente con matricola 123456",
+    "solution":"SELECT avg(Voto) \nFROM Esami \nWHERE Matr = 123456;"
+  },
+  {
+    "title": "Media voti esami 2005 per ogni studente",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola la media dei voti, per ogni studente, per gli esami dati nel 2005",
+    "solution":"SELECT Matr, avg(Voto) as MediaVoti \nFROM Esami \nWHERE Data BETWEEN 1-1-2005 AND 31-12-2005 \nGROUP BY Matr;"
+  },
+  {
+    "title": "Media Voti per studente con > 3 esami",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Calcola la media voti, per ogni studente che ha fatto almeno 3 esami",
+    "solution":"SELECT Matr, avg(Voto) as MediaVoti \nFROM Esami \nGROUP BY Matr \nHAVING count(*)>=3;"
+  },
+  {
+    "title": "Corsi con media voti 2005 > 25",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova i corsi in cui la media dei voti assegnata nel 2005 è maggiore di 25",
+    "solution":"SELECT Cod-Corso \nFROM Esami \nWHERE Data BETWEEN 1-1-2005 AND 31-12-2005 \nGROUP BY Cod-Corso \nHAVING avg(Voto)>25;"
+  },
+  {
+    "title": "Media dei corsi con più di 3 esami dati",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova i corsi e la media voti, per i corsi in cui il numero di esami dati è maggiore di 3; Ordina il risultato in ordine decrescente di media",
+    "solution":"SELECT Cod-Corso, avg(Voto) as MediaVoti \nFROM Esami \nGROUP BY Cod-Corso \nHAVING count(*)>3 \nORDER BY avg(Voto) DESC"
+  },
+  {
+    "title": "Studenti che non hanno ancora fatto un esame",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova le matricole degli studenti iscritti a SSRIOnline che non hanno ancora fatto un esame",
+    "solution":"SELECT Matr \nFROM Studenti \nWHERE CdL='SSRIOnline' \nEXCEPT \nSELECT Matr \nFROM Esami;"
+  },
+  {
+    "title": "Studenti iscritti a SSRIOnline che hanno fatto Basi Dati",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova le matricole degli studenti iscritti a SSRIOnline che hanno dato l'esame di Basi Dati (Codice: BD)",
+    "solution":"SELECT Matr \nFROM Studenti \nWHERE CdL='SSRIOnline' \nINTERSECT \nSELECT Matr \nFROM Esami \nWHERE Cod-corso='BD';"
+  },
+  {
+    "title": "Studenti che hanno preso almeno un 28 o un 30",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova matricola degli studenti che hanno preso almeno un 28 o un 30",
+    "solution":"SELECT Matr \nFROM Studenti \nWHERE Matr IN \nSELECT Matr \nFROM Esami \nWHERE Voto=28 OR Voto=30;"
+  },
+  {
+    "title": "Studenti che non hanno mai preso 30",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova matricola degli studenti che non hanno mai preso 30",
+    "solution":"SELECT Matr \nFROM Studenti \nWHERE Matr NOT IN SELECT Matr \nFROM Esami \nWHERE Voto=30;"
+  },
+  {
+    "title": "Studenti che hanno fatto un esame con il docente Rossi",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto) / Corsi(Codice,Titolo,Docente)",
+    "description":"Trova matricola degli studenti che hanno fatto almeno un esame con il docente Rossi",
+    "solution":"SELECT Matr \nFROM Studenti \nWHERE Matr IN SELECT Matr \nFROM Esami \nWHERE Cod-Corso IN \nSELECT Codice FROM Corsi \nWHERE Docente='Rossi';"
+  },
+  {
+    "title": "Studenti che hanno degli omonimi",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova nome,cognome degli studenti che hanno degli omonimi",
+    "solution":"SELECT Nome,Cognome \nFROM Studenti S1 \nWHERE (Nome,Cognome) IN SELECT Nome,Cognome \nFROM Studenti S2 \nWHERE S1.Matr <> S2.Matr;"
+  },
+  {
+    "title": "Studenti che hanno preso il voto più alto",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova la matricola degli studenti che hanno preso il voto più alto",
+    "solution":"SELECT Matr \nFROM Esami \nWHERE Voto = SELECT max(Voto) FROM Esami"
+  },
+  {
+    "title": "Studenti che hanno degli omonimi – Alternativa con EXISTS",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova dati degli studenti che hanno degli omonimi",
+    "solution":"SELECT * \nFROM Studenti S1 \nWHERE EXIST SELECT * FROM Studenti S2 \nWHERE S1.Matr <> S2.Matr AND S1.Nome = S2.Nome AND S1.Cognome = S2.Cognome;"
+  },
+  {
+    "title": "Studenti che hanno fatto più di un esame lo stesso giorno",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova la matricola degli studenti che hanno fatto più di un esame lo stesso giorno",
+    "solution":"SELECT Matr \nFROM Esami E1 \nWHERE EXIST SELECT * FROM Esami E2 \nWHERE E1.Matr = E2.Matr AND E1.Data = E2.Data AND E1.Cod-Corso <> E2.Cod-Corso;"
+  },
+  {
+    "title": "CdL di ogni studente",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova il corso di laurea di ogni studente, stampando la stringa 'non ins.' nel caso non sia presente un valore per il corso",
+    "solution":"SELECT Matr,coalesce(CdL,'non ins.') \nFROM Studenti;"
+  },
+  {
+    "title": "Esami con valore nullo nel caso sia ritirato",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Stampa tutti gli esami, imponendo valore nullo nel caso il voto sia uguale a ritirato",
+    "solution":"SELECT Matr,Cod-Corso,Data,nullif(Voto,'ritirato') \nFROM Esami;"
+  },
+  {
+    "title": "Trova tutti gli esami stampando i voti per fasce A,B,C",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Trova gli esami (Matr, Cod-Corso, Voto) convertendo i voti in fasce – C < 24 , A >= 27 , altrimenti B",
+    "solution":"SELECT Matr,Cod-Corso, \nCASE \nwhen Voto < 24 then 'C'  \nwhen Voto >= 24 AND Voto<27 then 'B' \nelse 'A' \nEND as Fascia \nFROM Esami;"
+  },
+  {
+    "title": "Inserimento nuovi studenti",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Inserire il nuovo studente Mario Rossi, con matricola 123456 iscritto a SSRI Online ",
+    "solution":"INSERT INTO Studenti \nVALUES ( 123456, 'Mario', 'Rossi', 'SSRIOnline');"
+  },
+  {
+    "title": "Cancellazione studente",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Cancellare lo studente con matricola 123456",
+    "solution":"DELETE FROM Studenti \nWHERE Matr = 123456;"
+  },
+  {
+    "title": "Cancellazione studenti senza esami",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Cancellare gli studenti che non hanno dato nessun esame",
+    "solution":"DELETE FROM Studenti \nWHERE Matr NOT IN SELECT Matr FROM Esami;"
+  },
+  {
+    "title": "Aumentare di un punto i voti",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Aumenta di un punto (se possibile) il voto di tutti gli studenti con più di 3 esami",
+    "solution":"UPDATE Esami SET Voto = Voto+1 \nWHERE Voto < 30 AND Matr IN \n(SELECT * FROM Esami GROUP BY Matr HAVING count(*)>3);"
+  },
+  {
+    "title": "Aumentare e Diminuire di un punto i voti",
+    "tables":"Studenti(Matr,Cognome,Nome,CdL) / Esami(Matr,Cod-corso,Data,Voto)",
+    "description":"Aumenta di un punto (se possibile) tutti i voti di BasiDati(BD) e diminuisci se <18 i voti di Sistemi(SO)",
+    "solution":"UPDATE Esami SET Voto = \nCASE \nwhen Voto<30 AND Cod-Corso='BD' then Voto = Voto+1  \nwhen Voto>18 AND Cod-Corso='SO' then Voto = Voto-1  \nelse voto \nEND;"
+  }
+
+
+]
