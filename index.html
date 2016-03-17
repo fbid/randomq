@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>RandomQ</title>
+  <title>Rndm?Q</title>
 
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="dist/css/main.css">
@@ -13,10 +13,18 @@
 <body>
 
   <header>
-    <h1> Random Q</h1>
+    <h1> Rndm?Q</h1>
   </header>
 
   <main ng-app="rndmq" ng-controller="MainCtrl as vm">
+
+      <div class="categories">
+        <ul>
+          <li ng-repeat="category in vm.categories">
+            <a href="#0"># {{category.name}}</a>
+          </li>
+        </ul>
+      </div>
 
     <div class="q">
       <h3>{{vm.selectedQuestion.title}}</h3>

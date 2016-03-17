@@ -4,6 +4,9 @@ $main-color: #41AB3D;
 $main-color-darken: #309A2C;
 $secondary-color: #D0D0C7;
 
+/*===============================================
+ # RESET
+/================================================*/
 *{
   margin:0;
   padding:0;
@@ -17,6 +20,17 @@ a:focus{
   color:#000;
 }
 
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  display:inline;
+}
+
+
 body{
   font: 16px/1.5em 'Fira Sans', Helvetica, sans-serif;
   font-weight:300;
@@ -24,6 +38,9 @@ body{
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/*===============================================
+ # HEADER
+/================================================*/
 
 header{
   lost-center:960px;
@@ -37,6 +54,10 @@ header{
     font-weight:300;
   }
 }
+
+/*===============================================
+ # MAIN
+/================================================*/
 
 main{
   lost-center:960px;
@@ -58,6 +79,21 @@ main{
     margin-bottom:15px;
     font-size:.65em;
     color:#999;
+  }
+
+
+  .categories {
+
+    margin-bottom:80px;
+
+    ul > li > a{
+      padding:15px;
+      text-decoration:none;
+      border:1px solid $secondary-color;
+      border-radius:5px;
+      color:$secondary-color;
+    }
+
   }
 
   .q{
@@ -111,6 +147,5 @@ main{
     }
 
   }
-
 
 }

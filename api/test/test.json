@@ -3,6 +3,6 @@
     "title": "This is an example",
     "tables":"Foo(id,street,zip,country), Bar(id,Foo_id)",
     "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "solution":"SELECT F* \nFROM FOO F \nWHERE F.id NOT IN \nSELECT Foo_id \nFROM Bar;"
+    "solution":"SELECT F* \nFROM FOO F \nWHERE F.id NOT IN \nSELECT Foo_id \nFROM Bar"
   }
 ]

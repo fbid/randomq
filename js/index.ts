@@ -20,24 +20,39 @@
       }
     }])
 
-    .controller('MainCtrl',['Questions', function(Questions) {
+    .factory('Categories',['$http', function($http){
+      return {
+        getAll: function() {
+          return $http.get('./api/question-categories.json');
+        }
+      }
+    }])
+
+    .controller('MainCtrl',['Questions','Categories', function(Questions, Categories) {
 
       var q = this;
 
       q.selectedQuestion = {};
       q.questions = [];
+      q.categories = [];
       q.showSolution = false;
 
-
+      //Fetch Questions
       Questions.getAll()
-        .then(function(response){
+        .then( (response):void => {
           q.questions = response.data;
           q.getQ();
       });
 
+      //Fetch Categories
+      Categories.getAll()
+        .then( (response):void => {
+          q.categories = response.data;
+        });
 
-      q.getQ = () => {
-        //q.showSolution = false; //reset
+      //Generate random question
+      q.getQ = ():void => {
+        q.showSolution = false; //reset
         var index = Math.floor(Math.random() * q.questions.length);
         q.selectedQuestion = q.questions[index];
       };
